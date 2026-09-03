@@ -24,7 +24,8 @@ branding-trend-analysis/
 ├── images/
 │   ├── 01_weekly_trend.png
 │   ├── 02_weekly_change.png
-│   └── 03_monthly_pattern.png
+│   ├── 03_monthly_pattern.png
+│   └── 04_speech_decomposition.png
 ├── analysis.ipynb
 ├── REPORT.md
 ├── README.md
@@ -49,6 +50,10 @@ branding-trend-analysis/
 
 연도와 월별로 주간 관심도의 평균을 계산해 반복 가능성이 있는 월별 패턴을 확인합니다. 2026년 7월은 3주만 포함된 부분 데이터로 표시하며, 반복 월 분석은 12개월이 모두 있는 2023~2025년을 기준으로 수행합니다.
 
+### 보너스: 스피치 시계열 분해
+
+스피치 주간 관심도를 가법 모형으로 관측값, 추세, 계절 성분, 잔차로 분리합니다. `period=52`는 연간 유사 주기를 탐색하기 위한 가정이며, 결과만으로 계절성의 존재를 단정하지 않습니다.
+
 ## 생성된 시각화
 
 1. [`images/01_weekly_trend.png`](images/01_weekly_trend.png)  
@@ -60,11 +65,14 @@ branding-trend-analysis/
 3. [`images/03_monthly_pattern.png`](images/03_monthly_pattern.png)  
    연도×월 평균 관심도를 히트맵으로 보여주고 2026년 7월 부분 데이터를 별도로 표시합니다.
 
+4. [`images/04_speech_decomposition.png`](images/04_speech_decomposition.png)
+   스피치 주간 관심도의 관측값, 추세, 52주 가정의 계절 성분, 잔차를 네 개 패널로 보여줍니다.
+
 ## 실행 환경
 
 - Python 3.10 이상
 - 검증된 실행 환경: Python 3.13.15
-- 사용 라이브러리: pandas, NumPy, Matplotlib, openpyxl
+- 사용 라이브러리: pandas, NumPy, Matplotlib, openpyxl, statsmodels
 - 노트북 실행 도구: Jupyter Notebook
 
 `requirements.txt`는 검증에 사용한 라이브러리 버전을 정확히 고정합니다. 해당 버전 중 NumPy 2.5.2는 Python 3.12 이상을 요구하므로, 동일한 버전 조합으로 재현하려면 Python 3.12 이상을 사용해야 합니다. 분석 코드는 Python 3.10 이상을 기준으로 작성했지만, Python 3.10 또는 3.11에서는 각 버전에서 설치 가능한 호환 라이브러리 버전이 필요합니다.
@@ -93,7 +101,7 @@ branding-trend-analysis/
 
 4. 브라우저에서 [`analysis.ipynb`](analysis.ipynb)를 열고 첫 번째 셀부터 마지막 셀까지 순서대로 실행합니다. Jupyter 메뉴의 `Restart Kernel and Run All Cells`를 사용하면 전체 셀을 순서대로 실행할 수 있습니다.
 
-노트북을 실행하면 `data/datalab.xlsx`를 읽어 분석하며, 세 개의 그래프가 `images/` 폴더에 저장됩니다. 원본 엑셀 파일에는 쓰기 작업을 하지 않습니다.
+노트북을 실행하면 `data/datalab.xlsx`를 읽어 분석하며, 네 개의 그래프가 `images/` 폴더에 저장됩니다. 원본 엑셀 파일에는 쓰기 작업을 하지 않습니다.
 
 ## 데이터 출처와 주의사항
 
@@ -107,4 +115,3 @@ branding-trend-analysis/
 ## 주요 결과
 
 분석 결과, 관찰과 해석의 구분, 콘텐츠 활용 방향, 한계점 및 AI 사용·검증 기록은 [`REPORT.md`](REPORT.md)에서 확인할 수 있습니다.
-
